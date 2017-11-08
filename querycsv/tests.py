@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-from __future__ import print_function
-from __future__ import unicode_literals
-from __future__ import division
 
 import csv
 import os.path
@@ -9,7 +6,7 @@ import unittest
 
 from io import StringIO
 
-from .querycsv import (query_csv, query_csv_file,
+from querycsv import (query_csv, query_csv_file,
                        query_sqlite, import_csv,
                        pretty_print, as_connection,
                        import_array)
@@ -23,7 +20,7 @@ def testfile(filename):
 
 def create_csv(filename, content):
     create_test_folder()
-    with open(filename, 'wb') as f:
+    with open(filename, 'w') as f:
         writer = csv.writer(f)
         rows = to_csv_rows(content)
         writer.writerows(rows)
@@ -31,7 +28,7 @@ def create_csv(filename, content):
 
 def create_file(filename, content):
     create_test_folder()
-    with open(filename, 'wb') as f:
+    with open(filename, 'w') as f:
         f.write(content)
 
 
@@ -75,11 +72,11 @@ class TestQueryFunctions(unittest.TestCase):
     def assertMatch(self, results, content):
         rows = to_csv_rows(content)
         self.assertEqual(len(results), len(rows))
-        for y in xrange(0, len(rows)):
+        for y in range(len(rows)):
             rowA = rows[y]
             rowB = results[y]
             self.assertEqual(len(rowA), len(rowB))
-            for x in xrange(0, len(rowA)):
+            for x in range(len(rowA)):
                 a = str(rowA[x])
                 b = str(rowB[x])
                 self.assertEqual(a, b)

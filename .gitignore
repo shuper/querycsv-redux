@@ -56,3 +56,5 @@ docs/_build/
 *.swp
 
 test_files/
+
+.idea/
